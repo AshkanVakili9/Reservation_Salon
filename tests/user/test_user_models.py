@@ -20,5 +20,5 @@ class TestSmsModel:
         # Act
         x = sms_factory()
         # Assert
-        assert x.__str__() == '09186550946'
+        assert x.__str__() == '12345670000'
             

@@ -34,11 +34,11 @@ class SalonImage(BaseModel):
 
 # امکانات
 class Amenity(BaseModel):
+    salon = models.ForeignKey('Salon', on_delete=models.CASCADE, related_name='salon_amenity', verbose_name='سالن')
     name = models.CharField(max_length=100, verbose_name='اسم')
     description = models.TextField( verbose_name='توضیحات')
     icon = models.ImageField(upload_to="amenity_icons", verbose_name='ایکون')
     active = models.BooleanField(default=True, verbose_name='فعال')
-    salon = models.ForeignKey('Salon', on_delete=models.CASCADE, related_name='salon_amenity', verbose_name='سالن')
 
     class Meta:
         verbose_name_plural = "امکانات"    
@@ -90,14 +90,14 @@ class Review(BaseModel):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='کاربر')
     name = models.CharField(max_length=200, null=True, blank=True, verbose_name='نام')
     court = models.ForeignKey("Court", on_delete=models.CASCADE, verbose_name='نوع زمین ورزشی')
-    rating = models.PositiveIntegerField( verbose_name='امتیاز')
+    rating = models.PositiveIntegerField(verbose_name='امتیاز')
     comment = models.TextField(blank=True, null=True, verbose_name='نظر')
     
     class Meta:
         verbose_name_plural = "نظرات"
             
     def __str__(self):
-        return f"Review for {self.court.name}"
+        return f"{self.name}"
 
 
 class CourtSize(BaseModel):
