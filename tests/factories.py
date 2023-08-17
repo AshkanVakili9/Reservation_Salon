@@ -70,3 +70,63 @@ class ReviewFactory(DjangoModelFactory):
     name = 'sample_name'
     court = factory.SubFactory(CourtFactory)
     rating = factory.Faker('pyfloat', left_digits=2, right_digits=1, positive=True)
+
+
+class BookingReferenceFactory(DjangoModelFactory):
+    class Meta:
+        model = BookingReference
+
+    title = factory.Faker('word')  
+
+
+class TimeSlotFactory(DjangoModelFactory):
+    class Meta:
+        model = TimeSlot
+    
+    start_end_time = factory.Faker('sentence', nb_words=4)
+        
+class AvailableTimeFactory(DjangoModelFactory):
+    class Meta:
+        model = AvailableTime
+
+    court = factory.SubFactory(CourtFactory)  
+    is_booked = factory.Faker('boolean')
+
+    @factory.post_generation
+    def times(self, create, extracted, **kwargs):
+        if not create:
+            return
+
+        if extracted:
+            for time in extracted:
+                self.times.add(time)
+
+
+class ReservationFactory(DjangoModelFactory):
+    class Meta:
+        model = Reservation
+
+    court = factory.SubFactory(CourtFactory)  # Replace with appropriate factory
+    user = factory.SubFactory(UserFactory)
+    is_paid = factory.Faker('boolean')
+    additional_notes = factory.Faker('text')
+    booking_reference = factory.SubFactory(BookingReferenceFactory)
+
+
+
+# class WalletFactory(DjangoModelFactory):
+#     class Meta:
+#         model = Wallet
+
+#     user = factory.SubFactory(UserFactory)
+#     balance = factory.Faker('pydecimal', right_digits=0, min_value=0, max_value=999999999999999)  # Adjust the range as needed
+
+
+
+class SalonImageFactory(DjangoModelFactory):
+    class Meta:
+        model = SalonImage
+
+    salon = factory.SubFactory(SalonFactory)
+    image = factory.django.ImageField()
+    alternative_text = factory.Faker('sentence', nb_words=6)

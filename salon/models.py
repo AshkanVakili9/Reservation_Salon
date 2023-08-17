@@ -159,7 +159,7 @@ class TimeSlot(BaseModel):
         verbose_name_plural = "زمان ها"
         
     def __str__(self):
-        return f' {self.start_end_time}'
+        return f'{self.start_end_time}'
 
 
 
@@ -173,7 +173,8 @@ class AvailableTime(BaseModel):
         
         
     def __str__(self):
-        return f' {self.court} {self.times}'
+        times_str = ", ".join(str(time) for time in self.times.all())
+        return f'{self.court} {times_str}'
 
 
 
@@ -204,4 +205,4 @@ class Wallet(BaseModel):
         verbose_name_plural = "کیف پول"
         
     def __str__(self):
-        return f"{self.user.full_name}"
+        return f"{self.user.phone}"
