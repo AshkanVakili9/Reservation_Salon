@@ -8,11 +8,13 @@ py -m venv venv
 
 venv\scripts\activate
 
-cd backend
 
-pip install -r req.txt
+pip install -r requirements.txt
 
+python manage.py makemigrations
+python manage.py migrate
 python manage.py generate_city
+python manage.py createsuperuser
 
 
 pytest --cov
