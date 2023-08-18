@@ -1,5 +1,9 @@
 from pytest_factoryboy import register
 from .factories import *
+import pytest
+from rest_framework.test import APIClient
+
+
 
 #################### User Factories ######################
 register(UserFactory)
@@ -19,3 +23,9 @@ register(AvailableTimeFactory)
 register(ReservationFactory)
 # register(WalletFactory)
 register(SalonImageFactory)
+
+
+
+@pytest.fixture
+def api_client():
+    return APIClient()

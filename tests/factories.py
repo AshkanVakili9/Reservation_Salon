@@ -29,7 +29,7 @@ class SalonFactory(DjangoModelFactory):
     
     user = factory.SubFactory(UserFactory)
     name = factory.Faker('company')
-    phone_number = factory.Sequence(lambda n: f'1234567{n:04d}')
+    phone_number = factory.Sequence(lambda n: f'0912345678{n:02d}')
 
 
 class AmenityFactory(DjangoModelFactory):
