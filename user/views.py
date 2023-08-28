@@ -131,8 +131,8 @@ def sendSms(request):
     user = request.user
     sms_send(request, phone=user.phone, template_id=245789)
     if sms_send:
-        return Response("Sms has been Sent", status=status.HTTP_201_CREATED)
-    return Response("Sms has been NoT Sent", status=status.HTTP_201_CREATED)
+        return Response("Sms has been Sent", status=status.HTTP_200_OK)
+    return Response("Sms has been NoT Sent", status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(["POST"])
