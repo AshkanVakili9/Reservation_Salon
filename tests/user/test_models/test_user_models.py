@@ -11,7 +11,7 @@ class TestUserModel:
         # Act
         x = user_factory()
         # Assert
-        assert x.__str__() == 'ash'
+        assert x.__str__() == x.full_name
     
 
 class TestSmsModel:
@@ -20,5 +20,5 @@ class TestSmsModel:
         # Act
         x = sms_factory()
         # Assert
-        assert x.__str__() == '12345670000'
+        assert x.__str__() == x.phone
             

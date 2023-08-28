@@ -1,8 +1,10 @@
 import factory
+from faker import Faker
 from  factory.django import DjangoModelFactory
 from user.models import User, Sms
 from salon.models import *
 
+fake = Faker()
 
 #################### User Factories ######################
 class UserFactory(DjangoModelFactory):
@@ -10,10 +12,10 @@ class UserFactory(DjangoModelFactory):
         model = User
         
     
-    full_name = 'ash'
+    full_name = factory.Faker("name")
     phone = factory.Sequence(lambda n: f'1234567{n:04d}')
-    password = '123'
-
+    password = factory.Faker("password")
+    
     
 class SmsFactory(DjangoModelFactory):
     class Meta:

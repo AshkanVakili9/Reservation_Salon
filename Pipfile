@@ -22,6 +22,7 @@ rest-framework-simplejwt = "*"
 setuptools = "*"
 pytest-cov = "*"
 pytest-factoryboy = "*"
+persian-tools = "*"
 
 [dev-packages]
 

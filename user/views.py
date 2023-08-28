@@ -9,7 +9,7 @@ import random
 import requests
 import json
 from django.shortcuts import get_object_or_404
-
+from persian_tools import phone_number
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -61,43 +61,44 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 
 @api_view(["POST"])
 def registerUser(request):
-    data = request.data
-    if data['password'] == data['confirm_password']:
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
-            user_check = User.objects.filter(
-                phone=serializer.validated_data["phone"]
-            ).first()
-            if user_check is None:
-                user = User.objects.create(
-                    full_name=serializer.validated_data["full_name"],
-                    phone=serializer.validated_data["phone"],
-                    password=make_password(serializer.validated_data["password"]),
-                )
-                # Replace sms_send with the appropriate SMS sending implementation
-                sms_send(
-                    request, phone=serializer.validated_data["phone"], template_id=245789
-                )
-                # Use UserSerializer instead of UserSerializerWithToken if no token is needed
-                serializer = UserSerializerWithToken(user, many=False)
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            else:
-                return Response(
-                    {"error": "User already exists with this phone number."},
-                    status=status.HTTP_400_BAD_REQUEST,
-                )
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    full_name = request.data.get('full_name')
+    phone = phone_number.normalize(request.data.get('phone'))
+    password = request.data.get('password')
+    confirm_password = request.data.get('confirm_password')
+
+    if not (full_name and phone and password and confirm_password):
+        return Response({"error": "Missing required fields."}, status=status.HTTP_400_BAD_REQUEST)
+
+    if password != confirm_password:
+        return Response({"error": "Passwords do not match."}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        user = User.objects.get(phone=phone)
+        return Response({"error": "User already exists with this phone number."}, status=status.HTTP_400_BAD_REQUEST)
+    except User.DoesNotExist:
+        pass
+
+    data = {
+        'full_name': full_name,
+        'phone': phone,
+        'password': make_password(password),
+    }
+
+    serializer = UserSerializer(data=data)
+    if serializer.is_valid():
+        user = serializer.save()
+        # Replace sms_send with the appropriate SMS sending implementation
+        sms_send(request, phone=phone, template_id=245789)
+        # Use UserSerializer instead of UserSerializerWithToken if no token is needed
+        serializer_with_token = UserSerializerWithToken(user, many=False)
+        return Response(serializer_with_token.data, status=status.HTTP_201_CREATED)
     else:
-        return Response(
-            {"error": "Passwords do not match."}, status=status.HTTP_400_BAD_REQUEST
-        )
-              
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
      
      
 @api_view(["POST"])
 def sendSmsByPhoneNumber(request):
-    user_phone = request.data['phone']
+    user_phone = phone_number.normalize(request.data['phone'])
     sms_send(request, phone=user_phone, template_id=245789)
     if sms_send:
         return Response("Sms has been Sent", status=status.HTTP_201_CREATED)
@@ -107,7 +108,7 @@ def sendSmsByPhoneNumber(request):
         
 @api_view(["POST"])
 def forgetPassword(request):
-    user_phone = request.data['phone']
+    user_phone = phone_number.normalize(request.data['phone'])
     code = request.data['code']
     password = request.data['password']
     confirm_password = request.data['confirm_password']

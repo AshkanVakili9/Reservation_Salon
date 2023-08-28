@@ -6,7 +6,7 @@ from .models import *
 class UserAdmin(admin.ModelAdmin):
 
     readonly_fields=('date_joined','updatedAt', 'password')
-    list_display = ['full_name', 'phone', 'is_staff', 'is_active', 'is_verified', 'date_joined', 'updatedAt']
+    list_display = ['pk', 'full_name', 'phone', 'is_staff', 'is_active', 'is_verified', 'date_joined', 'updatedAt']
 
     search_fields = ['full_name', 'last_name', 'phone']
     
