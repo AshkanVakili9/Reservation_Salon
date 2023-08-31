@@ -93,3 +93,11 @@ class TimeSlotSerializer(serializers.ModelSerializer):
     class Meta:
         model = TimeSlot
         fields = "__all__"
+        
+        
+        
+        
+class SiteReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SiteReview
+        fields = "__all__"

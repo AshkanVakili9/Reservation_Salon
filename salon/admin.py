@@ -51,7 +51,11 @@ class AvailableTimeAdmin(admin.ModelAdmin):
 class WalletAdmin(admin.ModelAdmin):
     list_display = ['user', 'balance']
     search_fields =['user']    
-     
+
+class SiteReviewAdmin(admin.ModelAdmin):
+    list_display = ['user']
+    search_fields =['user'] 
+    
 admin.site.register(SalonImage, SalonImageAdmin)
 admin.site.register(Location, LocationAdmin)
 admin.site.register(Salon, SalonAdmin)
@@ -65,3 +69,4 @@ admin.site.register(Wallet, WalletAdmin)
 
 admin.site.register(BookingReference)
 admin.site.register(TimeSlot)
+admin.site.register(SiteReview, SiteReviewAdmin)

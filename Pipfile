@@ -23,6 +23,7 @@ setuptools = "*"
 pytest-cov = "*"
 pytest-factoryboy = "*"
 persian-tools = "*"
+psycopg2 = "*"
 
 [dev-packages]
 

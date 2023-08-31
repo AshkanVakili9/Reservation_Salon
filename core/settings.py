@@ -10,7 +10,7 @@ SECRET_KEY = "django-insecure-7l3xdm0oouw0vzhg49ql^khpe*2u@0t(n=e^(u2%&e4nz^!4qh
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
@@ -81,6 +81,13 @@ DATABASES = {
 }
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',       
+#     }
+# }
+
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -109,13 +116,35 @@ USE_I18N = True
 
 USE_TZ = True
 
-
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# # MEDIA_ROOT = os.path.join(BASE_DIR, "
 STATIC_URL = "static/"
 MEDIA_URL = "images/"
 
 STATICFILES_DIRS = [BASE_DIR]
 
 MEDIA_ROOT = "static/images"
+
+
+
+# settings.py
+import os
+
+# ...
+
+# Change the location where Django will collect and create static files.
+# Here, we're specifying the "staticfiles" directory within your BASE_DIR.
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+# STATIC_URL = "/static/"
+# MEDIA_URL = "/images/"
+
+# # Specify the location where Django should look for additional static files.
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, "staticfiles/static")]
+
+# # Specify the root location where uploaded media files should be stored.
+# MEDIA_ROOT = os.path.join(BASE_DIR, "staticfiles/static/images")
+
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

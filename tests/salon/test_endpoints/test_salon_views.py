@@ -1,10 +1,10 @@
-import pytest
-from django.urls import reverse
-from rest_framework.test import APIClient
-from rest_framework import status
-import json
+# import pytest
+# from django.urls import reverse
+# from rest_framework.test import APIClient
+# from rest_framework import status
+# import json
 
-pytestmark = pytest.mark.django_db
+# pytestmark = pytest.mark.django_db
 
 
 

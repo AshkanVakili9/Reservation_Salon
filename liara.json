@@ -1,0 +1,14 @@
+{
+    "app": "rezervit",
+    "disks": [
+        {
+            "name": "rs-disk",
+            "mountTo": "static/"
+        },
+        {
+            "name": "rs-disk",
+            "mountTo": "media/"
+        }
+
+    ]
+}

@@ -9,6 +9,7 @@ from .views.review_views import *
 from .views.availableTime_views import *
 from .views.reserve_views import *
 from .views.wallet_views import *
+from .views.site_review_views import *
 
 
 urlpatterns = [
@@ -72,8 +73,8 @@ urlpatterns = [
     
     #Wallet
     path('get_wallet_balance/', get_wallet_balance, name='get_wallet_balance'),
-    path('update_wallet_balance/', update_wallet_balance, name='update_wallet_balance')
+    path('update_wallet_balance/', update_wallet_balance, name='update_wallet_balance'),
     
-    
-    
+    #Site_Review
+    path('add_site_review/', addSiteReview, name='post site review'),
 ]   
