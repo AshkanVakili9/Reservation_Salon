@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import *
 from drf_extra_fields.fields import HybridImageField
-
+from iranian_cities.models import Province, County
 
 class SalonImageSerializer(serializers.ModelSerializer):
     # image = HybridImageField(represent_in_base64=True)
@@ -39,6 +39,7 @@ class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
         fields = "__all__"
+        depth=1
 
 
 class CourtSerializer(serializers.ModelSerializer):
@@ -100,4 +101,16 @@ class TimeSlotSerializer(serializers.ModelSerializer):
 class SiteReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = SiteReview
+        fields = "__all__"
+
+
+
+class ProvinceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Province
+        fields = "__all__"
+
+class CountySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = County
         fields = "__all__"

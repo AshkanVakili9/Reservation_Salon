@@ -3,8 +3,37 @@ from salon.serializers import *
 from rest_framework.decorators import api_view, permission_classes
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
-from rest_framework.permissions import IsAdminUser, AllowAny
+from rest_framework.permissions import IsAdminUser
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from iranian_cities.models import Province, County
+
+
+# Province == Ostan
+@api_view(["GET"])
+def getProvince(request):
+    province = Province.objects.all()
+    serializer = ProvinceSerializer(province, many=True)
+    return Response(serializer.data, status=201)
+
+
+# County == Shahrestan
+@api_view(["GET"])
+def getCounty(request, province_id):
+    county = County.objects.filter(province_id=province_id)
+    serializer = CountySerializer(county, many=True)
+    return Response(serializer.data, status=201)
+
+# @api_view(["GET"])
+# def getSalonByCounty(request,shahrestan_id):
+#     salons = Salon.objects.filter(salon__location__county_id=shahrestan_id)
+#     serializer = SalonSerializer(salons, many=True)
+#     return Response(serializer.data, status=201)
+
+@api_view(["GET"])
+def getSalonByCounty(request, shahrestan_id):
+    salons = Location.objects.filter(shahrestan_id=shahrestan_id)
+    serializer = LocationSerializer(salons, many=True)
+    return Response(serializer.data, status=200)
 
 
 @api_view(["POST"])

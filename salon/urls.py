@@ -35,6 +35,12 @@ urlpatterns = [
     path("update_salon/<str:pk>/", updateSalon, name="update-salon-by-id"),
     path("delete_salon/<str:pk>/", deleteSalon, name="delete-salon-by-id"),
     
+    
+    #Ostan
+    path('get_ostan/', getProvince, name='get-all-ostan'),
+    path('get_shahrestan/<int:province_id>/', getCounty, name='get-shahrestan-by-ostan-id'),
+    path('get_salon_by_shahrestan/<int:shahrestan_id>/', getSalonByCounty, name='get_salon_by_county'),
+    
     #Location
     path('location/', location, name='location-list'),
     path('location/<int:pk>/', location, name='location-detail'),
