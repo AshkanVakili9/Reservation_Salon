@@ -42,8 +42,8 @@ urlpatterns = [
     path('get_salon_by_shahrestan/<int:shahrestan_id>/', getSalonByCounty, name='get_salon_by_county'),
     
     #Location
-    path('location/', location, name='location-list'),
-    path('location/<int:pk>/', location, name='location-detail'),
+    path('get_all_locations/', get_all_locations, name='get_all_locations --- admin-only'),
+    path('get_location/<int:pk>/', get_location, name='location_detail'),
     
     #Court
     path('court/', court, name='court-list'),

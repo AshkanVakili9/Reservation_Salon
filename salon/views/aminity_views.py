@@ -29,7 +29,6 @@ def getAllAminity(request):
     return Response(serializer.data, status=200)
 
 @api_view(["GET"])
-@permission_classes([IsAdminUser])
 def getAminity(request, pk):
     amenity = get_object_or_404(Amenity, id=pk)
     serializer = AmenitySerializer(amenity)

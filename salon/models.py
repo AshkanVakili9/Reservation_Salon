@@ -62,16 +62,16 @@ class Amenity(BaseModel):
 
 class Location(BaseModel):
     salon = models.ForeignKey(
-        "Salon", on_delete=models.PROTECT, blank=True, null=True, related_name='location', verbose_name='سالن'
+        "Salon", on_delete=models.PROTECT, related_name='location', verbose_name='سالن'
     )
-    ostan = ProvinceField(blank=True, null=True, verbose_name='استان')
-    shahrestan = CountyField(blank=True, null=True, verbose_name='شهرستان')
+    ostan = ProvinceField(blank=True, verbose_name='استان')
+    shahrestan = CountyField(blank=True, verbose_name='شهرستان')
     latitude = models.FloatField(
         blank=True, null=True, verbose_name='عرض جغرافیایی')
     longitude = models.FloatField(
         blank=True, null=True, verbose_name='طول جغرافیایی')
     address = models.CharField(
-        max_length=200, blank=True, null=True, verbose_name='ادرس سالن')
+        max_length=200, blank=True, verbose_name='ادرس سالن')
 
     class Meta:
         verbose_name_plural = "آدرس سالن ها"

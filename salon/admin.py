@@ -10,12 +10,12 @@ class SalonImageAdmin(admin.ModelAdmin):
     list_filter = ['alternative_text']
 
 class LocationAdmin(admin.ModelAdmin):
-    list_display = ['salon','ostan', 'shahrestan', 'address']
+    list_display = ['pk','salon','ostan', 'shahrestan', 'address']
     search_fields = ['salon', 'ostan', 'shahrestan']
     list_filter = ['salon', 'ostan']
 
 class SalonAdmin(admin.ModelAdmin):
-    list_display = ['user', 'name','phone_number', 'rating']
+    list_display = ['pk', 'user', 'name','phone_number', 'rating']
     search_fields = ['phone_number',]
     
     
