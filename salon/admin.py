@@ -43,10 +43,9 @@ class AmenityAdmin(admin.ModelAdmin):
 
 
 class AvailableTimeAdmin(admin.ModelAdmin):
-    list_display = ['court', 'is_booked']
+    list_display = ['createdAt', 'is_booked']
     search_fields =['court', 'salon']    
-
-    
+ 
     
 class WalletAdmin(admin.ModelAdmin):
     list_display = ['user', 'balance']

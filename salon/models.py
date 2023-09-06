@@ -197,8 +197,9 @@ class TimeSlot(BaseModel):
 
 
 class AvailableTime(BaseModel):
-    court = models.ForeignKey("Court", on_delete=models.PROTECT,
-                              related_name="available_time", verbose_name='نوع زمین ورزشی')
+    # court = models.ForeignKey("Court", on_delete=models.PROTECT,
+    #                           related_name="available_time", verbose_name='نوع زمین ورزشی')
+    court = models.ManyToManyField(Court, verbose_name='نوع زمین ورزشی')
     times = models.ManyToManyField('TimeSlot', blank=True, verbose_name='زمان')
     is_booked = models.BooleanField(default=False, verbose_name='رزرو شده')
 
