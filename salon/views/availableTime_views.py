@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def available_time_list(request):
-    available_times = AvailableTime.objects.all()
+    available_times = AvailableTime.objects.all().order_by('-createdAt')
     serializer = AvailableTimeSerializer(available_times, many=True)
     return Response(serializer.data)
 

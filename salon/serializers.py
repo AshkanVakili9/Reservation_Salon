@@ -22,11 +22,19 @@ class AmenitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Amenity
         fields = "__all__"
-
-
-class ReservationSerializer(serializers.ModelSerializer):
+        
+        
+class OrderTimeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Reservation
+        model = OrderTime
+        fields = "__all__"
+
+
+class ReserveSerializer(serializers.ModelSerializer):
+    order_time = OrderTimeSerializer(read_only=True)
+    
+    class Meta:
+        model = Reserve
         fields = "__all__"
 
 
@@ -44,7 +52,7 @@ class LocationSerializer(serializers.ModelSerializer):
 
 class CourtSerializer(serializers.ModelSerializer):
     review = serializers.SerializerMethodField(read_only=True)
-    reservations = ReservationSerializer(many=True, read_only=True)
+    reservations = ReserveSerializer(many=True, read_only=True)
     available_time = AvailableTimeSerializer(many=True, read_only=True)
 
     class Meta:
@@ -77,11 +85,6 @@ class SalonSerializer(serializers.ModelSerializer):
         model = Salon
         fields = "__all__"
 
-
-class BookingReferenceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = BookingReference
-        fields = "__all__"
 
 
 class WalletSerializer(serializers.ModelSerializer):

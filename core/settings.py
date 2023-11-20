@@ -20,12 +20,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    
+    "rest_framework_simplejwt",
     "rest_framework",
-    "user.apps.UserConfig",
-    "salon.apps.SalonConfig",
     "requests",
     "iranian_cities",
-    "rest_framework_simplejwt",
+    'azbankgateways',
+    
+    "user.apps.UserConfig",
+    "salon.apps.SalonConfig",
 ]
 
 AUTH_USER_MODEL = "user.User"
@@ -127,9 +130,6 @@ MEDIA_ROOT = "static/images"
 
 
 
-# settings.py
-import os
-
 # ...
 
 # Change the location where Django will collect and create static files.
@@ -154,3 +154,25 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
+
+
+AZ_IRANIAN_BANK_GATEWAYS = {
+   'GATEWAYS': {
+       'IDPAY': {
+           'MERCHANT_CODE': '<YOUR MERCHANT CODE>',
+           'METHOD': 'POST',  # GET or POST
+           'X_SANDBOX': 1,  # 0 disable, 1 active
+       },
+       
+   },
+   'IS_SAMPLE_FORM_ENABLE': True, # اختیاری و پیش فرض غیر فعال است
+   'DEFAULT': 'IDPAY',
+   'CURRENCY': 'IRR', # اختیاری
+   'TRACKING_CODE_QUERY_PARAM': 'tc', # اختیاری
+   'TRACKING_CODE_LENGTH': 16, # اختیاری
+   'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader', # اختیاری
+   'BANK_PRIORITIES': [
+   ], # اختیاری
+   'IS_SAFE_GET_GATEWAY_PAYMENT': True, #اختیاری، بهتر است True بزارید.
+   'CUSTOM_APP': None, # اختیاری 
+}
