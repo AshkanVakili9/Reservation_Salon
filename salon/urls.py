@@ -4,13 +4,13 @@ from .views.aminity_views import *
 from .views.salon_views import *
 from .views.location_views import *
 from .views.court_views import *
-from .views.booking_ref_views import *
+# from .views.booking_ref_views import *
 from .views.review_views import *
 from .views.availableTime_views import *
 from .views.reserve_views import *
 from .views.wallet_views import *
 from .views.site_review_views import *
-
+from azbankgateways.urls import az_bank_gateways_urls
 
 urlpatterns = [
     
@@ -51,8 +51,8 @@ urlpatterns = [
     path('court/city/<str:shahrestan>/', courtByShahr, name='get-court-by-city'),
     
     #Booking_Reference
-    path('booking_reference/', getBookingReference, name='get-booking-reference'),
-    path('booking_reference/<int:pk>/', getBookingReference, name='booking-reference-detail'),
+    path('bankgateways/', az_bank_gateways_urls),
+    # path('booking_reference/<int:pk>/', getBookingReference, name='booking-reference-detail'),
     
     #Review
     path('get_review_by_court_id/<int:court_id>/',getReviewByCourtId , name='get-review-by-court-id'),
