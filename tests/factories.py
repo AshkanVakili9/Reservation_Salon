@@ -49,10 +49,6 @@ class LocationFactory(DjangoModelFactory):
     salon = factory.SubFactory(SalonFactory)
     address = 'sample_address'
  
- 
-class CourtSizeFactory(DjangoModelFactory):
-    class Meta:
-        model = CourtSize
 
     
 class CourtFactory(DjangoModelFactory):
@@ -61,7 +57,7 @@ class CourtFactory(DjangoModelFactory):
     
     salon = factory.SubFactory(SalonFactory)
     name = 'sample_name'
-    size = factory.SubFactory(CourtSizeFactory)
+
     
     
 class ReviewFactory(DjangoModelFactory):
@@ -73,12 +69,6 @@ class ReviewFactory(DjangoModelFactory):
     court = factory.SubFactory(CourtFactory)
     rating = factory.Faker('pyfloat', left_digits=2, right_digits=1, positive=True)
 
-
-class BookingReferenceFactory(DjangoModelFactory):
-    class Meta:
-        model = BookingReference
-
-    title = factory.Faker('word')  
 
 
 class TimeSlotFactory(DjangoModelFactory):
@@ -106,13 +96,13 @@ class AvailableTimeFactory(DjangoModelFactory):
 
 class ReservationFactory(DjangoModelFactory):
     class Meta:
-        model = Reservation
+        model = Reserve
 
     court = factory.SubFactory(CourtFactory)  # Replace with appropriate factory
     user = factory.SubFactory(UserFactory)
     is_paid = factory.Faker('boolean')
     additional_notes = factory.Faker('text')
-    booking_reference = factory.SubFactory(BookingReferenceFactory)
+
 
 
 

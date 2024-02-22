@@ -10,7 +10,10 @@ urlpatterns = [
     path("forget_password/", forgetPassword, name="forget_password"),
     
     path("verifycode/", verifyCode, name="verify-sms-code"),
-    path("login/", CustomTokenObtainPairView.as_view(), name="token_obtain_pair"),
+    
+    # path("login/", CustomTokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("login/", loginUser, name="token_obtain_pair"),
+    
     path("profile/", getUserProfile, name="user-profile"),
     path("profile/update/", updateUserProfile, name="user-profile-update"),
     path("", getUsers, name="users"),

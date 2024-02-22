@@ -20,13 +20,10 @@ class SalonAdmin(admin.ModelAdmin):
     
     
 class CourtAdmin(admin.ModelAdmin):
-    list_display = ['name','salon', 'availability', 'size', 'price', 'rating']
+    list_display = ['name','salon', 'availability', 'price', 'rating']
     search_fields = ['name', 'salon']
     list_filter = ['availability']
-    
-    
-# class CourtSizeAdmin(admin.ModelAdmin):
-#     list_display = ['size']
+
 
 class ReservationAdmin(admin.ModelAdmin):
     list_display = ['user', 'is_paid','payment_method', 'total_amount', 'paid_at']
@@ -43,7 +40,7 @@ class AmenityAdmin(admin.ModelAdmin):
 
 
 class AvailableTimeAdmin(admin.ModelAdmin):
-    list_display = ['createdAt', 'is_booked']
+    list_display = ['pk','time', 'court', 'date', 'is_booked', 'createdAt', 'discount']
     search_fields =['court', 'salon']    
 
     
@@ -59,15 +56,13 @@ admin.site.register(SalonImage, SalonImageAdmin)
 admin.site.register(Location, LocationAdmin)
 admin.site.register(Salon, SalonAdmin)
 admin.site.register(Court, CourtAdmin)
-# admin.site.register(CourtSize, CourtSizeAdmin)
+
 admin.site.register(Reserve, ReservationAdmin)
 admin.site.register(Review,ReviewAdmin)
 admin.site.register(Amenity, AmenityAdmin)
 admin.site.register(AvailableTime, AvailableTimeAdmin)
 admin.site.register(Wallet, WalletAdmin)
 
-# admin.site.register(BookingReference)
 admin.site.register(TimeSlot)
 admin.site.register(OrderTime)
-admin.site.register(MonthlyReservation)
 admin.site.register(SiteReview, SiteReviewAdmin)

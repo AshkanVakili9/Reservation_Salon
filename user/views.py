@@ -12,7 +12,8 @@ from django.shortcuts import get_object_or_404
 from persian_tools import phone_number
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-
+from django.contrib.auth.hashers import check_password
+import threading
 
 def sms_send(request, phone, template_id):
     try:
@@ -56,6 +57,27 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
 
+@api_view(["POST"])
+def loginUser(request):
+    phone = request.data.get('phone')
+    password = request.data.get('password')
+    
+    if not phone and password:
+        return Response({"error": "Missing required fields."}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        user = User.objects.get(phone=phone)
+        if not check_password(password, user.password):
+            return Response({"error": "Invalid credentials."}, status=status.HTTP_401_UNAUTHORIZED)
+        user_data = UserSerializerWithToken(user,  many=False)
+        return Response({"message": "Login successful.", "user_data": user_data.data}, status=status.HTTP_200_OK)
+    except User.DoesNotExist:
+        return Response({"error": "User not found."}, status=status.HTTP_404_NOT_FOUND)    
+
+        
+        
+        
+        
 """ alternated by chatgpt """
 
 
@@ -88,7 +110,7 @@ def registerUser(request):
     if serializer.is_valid():
         user = serializer.save()
         # Replace sms_send with the appropriate SMS sending implementation
-        sms_send(request, phone=phone, template_id=245789)
+        threading.Thread(target=sms_send, args=(request, phone, 245789)).start()
         # Use UserSerializer instead of UserSerializerWithToken if no token is needed
         serializer_with_token = UserSerializerWithToken(user, many=False)
         return Response(serializer_with_token.data, status=status.HTTP_201_CREATED)

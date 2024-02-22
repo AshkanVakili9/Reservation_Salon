@@ -121,12 +121,12 @@ USE_TZ = True
 
 # STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # # MEDIA_ROOT = os.path.join(BASE_DIR, "
-STATIC_URL = "static/"
-MEDIA_URL = "images/"
+# STATIC_URL = "static/"
+# MEDIA_URL = "images/"
 
-STATICFILES_DIRS = [BASE_DIR]
+# STATICFILES_DIRS = [BASE_DIR]
 
-MEDIA_ROOT = "static/images"
+# MEDIA_ROOT = "static/images"
 
 
 
@@ -144,6 +144,16 @@ MEDIA_ROOT = "static/images"
 
 # # Specify the root location where uploaded media files should be stored.
 # MEDIA_ROOT = os.path.join(BASE_DIR, "staticfiles/static/images")
+
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
+
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/static')
+
+
+
 
 
 

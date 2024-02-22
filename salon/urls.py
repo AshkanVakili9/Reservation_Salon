@@ -50,9 +50,9 @@ urlpatterns = [
     path('court/<int:pk>/', court, name='court-detail'),
     path('court/city/<str:shahrestan>/', courtByShahr, name='get-court-by-city'),
     
-    #Booking_Reference
+    #Bank_Gateways
     path('bankgateways/', az_bank_gateways_urls),
-    # path('booking_reference/<int:pk>/', getBookingReference, name='booking-reference-detail'),
+
     
     #Review
     path('get_review_by_court_id/<int:court_id>/',getReviewByCourtId , name='get-review-by-court-id'),
