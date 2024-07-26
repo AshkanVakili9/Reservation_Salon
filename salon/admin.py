@@ -64,5 +64,5 @@ admin.site.register(AvailableTime, AvailableTimeAdmin)
 admin.site.register(Wallet, WalletAdmin)
 
 admin.site.register(TimeSlot)
-admin.site.register(OrderTime)
+# admin.site.register(OrderTime)
 admin.site.register(SiteReview, SiteReviewAdmin)

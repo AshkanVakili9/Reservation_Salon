@@ -226,8 +226,8 @@ class Reserve(BaseModel):
 
 # order item
 class OrderTime(BaseModel):
-   available_time = models.ManyToManyField('AvailableTime', blank=True,  null=True, related_name='تایم های رزروی')
-   reserve = models.ForeignKey('Reserve', on_delete=models.SET_NULL, null=True, related_name='سبد خرید')
+   available_time = models.ManyToManyField('AvailableTime', blank=True, related_name='time_reservations')
+   reserve = models.ForeignKey('Reserve', on_delete=models.SET_NULL, null=True, related_name='order_time_reservations')
    price = models.DecimalField(max_digits=15, decimal_places=0, verbose_name='مبلغ')
    
    class Meta:
@@ -235,6 +235,7 @@ class OrderTime(BaseModel):
    
    def __str__(self) -> str:
       return str(self.available_time)
+
 
 
 class Wallet(BaseModel):
